@@ -1,0 +1,14 @@
+.button {
+	display: inline-block;
+	border: 1px solid #C4A76D;
+	color: #fff;
+	text-transform: uppercase;
+	transition: all .2s ease;
+	padding: .75rem 3rem;
+	margin-top: 1.5rem;
+	letter-spacing: 1px;
+
+	&:hover {
+		background: #C4A76D;
+	}
+}

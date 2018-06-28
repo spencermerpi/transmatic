@@ -1,0 +1,7 @@
+#fullpage {
+	width: calc(100% - 200px);
+
+	@include phone {
+		width: calc(100% - 50px);
+	}
+}

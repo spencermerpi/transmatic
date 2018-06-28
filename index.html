@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8) ]><!-->
+<html>
+<!--<![endif]-->
+<head>
+<!-- jQuery ui css--> 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+<link href="public/css/main.css?v=1.1" rel="stylesheet" type="text/css">
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+<script type="text/javascript" src="src/js/jquery.fullpage.js"></script>
+<script type="text/javascript" src="src/js/scrolloverflow.min.js"></script>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>History | Transmatic</title>
+
+<script type="text/javascript">
+
+	function animateValue(id, start, end, duration) {
+	    var range = end - start;
+	    var current = start;
+	    if(end != start) {
+		    var increment = end > start? 1 : -1;
+		    var stepTime = Math.abs(Math.floor(duration / range));
+		    var obj = document.getElementById(id);
+		    var timer = setInterval(function() {
+		        current += increment;
+		        obj.innerHTML = current;
+		        if (current == end) {
+		            clearInterval(timer);
+		        }
+		    }, stepTime);
+		}
+	}
+		var deleteLog = false;
+
+		$(document).ready(function() {
+			$('#fullpage').fullpage({
+				sectionsColor: ['#000', '#000', '#000', '#000', '#000','#000', '#000', '#000', '#000', '#000','#000', '#000', '#000', '#000', '#000', '#000'],
+				anchors: ['start', 'page-1968', 'page-1970', 'page-1977', 'page-1989', 'page-1992', 'page-1998', 'page-2002', 'page-2006', 'page-2012', 'page-2012-2', 'page-2015', 'page-2016', 'page-2018'],
+				menu: '#menu',
+				scrollOverflow: true,
+				onLeave: function(index, nextIndex, direction){
+
+				},
+				onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){
+					
+					
+				},
+				afterRender: function(){
+					
+				},
+				afterResize: function(){
+					
+				},
+				afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){
+					
+				},
+				afterLoad: function(anchorLink, index){
+                    
+					var curentDate = $('#date-change').html();
+					var dateChange = anchorLink.replace('page-','');
+					if(dateChange != 'start') {
+						animateValue("date-change", parseInt(curentDate), parseInt(dateChange), 300);
+					}
+					if(index == 1) {
+						$('#date-change').fadeOut();
+					} else {
+						$('#date-change').fadeIn();
+					}
+					var dateHeight = $('#date-change').height();
+					var sectionOffset = $('#section'+index+' .intro').offset();
+					var dateOffset = sectionOffset['top'] - dateHeight + 20;
+					$('#date-change').css({'top': dateOffset});
+				}
+			});
+
+		});
+	</script>
+</head>
+
+<body>
+
+<a href="https://transmatic.com"><div class="transmatic-logo"><svg viewbox="0, 0, 291, 30" xmlns="http://www.w3.org/2000/svg"><g fill="#FFF"><path d="M229.42 1.36h8.49c.57 2.42 1.33 3 3.64 3.11h10v6.59h-13.48v10.16a2.38 2.38 0 0 0 2.24 1.51h11.33v6.24h-17.18c-3.33.57-5.11-2.12-5-5.42l-.04-22.19zm-32.73 3.11h24.25c5.38-.15 6.44 2.65 6.51 6.63v16.1c.12 1.06-.22 2.05-2 1.78h-24.82c-6.1-.15-7.62-15.19 1.44-15.31h15.11a1.34 1.34 0 0 0 0-2.65h-20.49V4.47zm21.1 15.3h-12.13c-1.89.23-1.55 3.15 0 3.08h12.13v-3.08zm35.58-15.41h8.68V29.1h-8.68zM262.05 0v2.88h-8.68V0M0 1.36h8.49c.56 2.42 1.44 3.15 3.63 3.11h10v6.59H8.6v10.16a2.38 2.38 0 0 0 2.24 1.51h11.32v6.24H5.07c-3.34.57-5.12-2.12-5-5.42L0 1.36zm23.41 27.61V6.66c.19-1.62.57-2.08 2.58-2.15h15.95v6.59h-7.95a1 1 0 0 0-1.44 1v16.81l-9.14.06zm19.82-24.5h24.25c5.38-.15 6.44 2.65 6.52 6.63v16.1c.11 1.06-.23 2.05-2 1.78H47.17c-6.1-.15-7.61-15.19 1.44-15.31h15.12a1.34 1.34 0 0 0 0-2.65h-20.5V4.47zm21.11 15.3H52.21c-1.89.23-1.55 3.15 0 3.08h12.13v-3.08zm11.02 9.2V4.47h26.52c4.93-.12 6.37 2.61 6.33 6.51v17.99h-8.86V12.46c-.08-.87-.19-1.36-1.25-1.4H85.74c-.94.15-1 .45-1.21 1.1v16.81h-9.17zm66.31-14.19h7.88v4.28h-7.88z"/><path d="M139.07 4.51h-23c-8 0-8.94 15.49 0 15.68h13.4c2.23 0 2 2.35 0 2.39h-19v6.39h25.31c7-.07 6.93-15.57 0-15.68h-15.1a1.12 1.12 0 1 1 0-2.24h18.49l-.1-6.54zm11.73 0v24.46h9.09v-16c.19-1.32.61-1.36 3.6-1.44 2.99-.08 3.56.08 3.64 1.44v16h10.08V13.18c0-1.29.26-1.59 3.71-1.67 3.41.12 3.75.19 3.83 1.67v15.79h9.32V11.33c-.38-4.67-1.25-6.45-6.52-6.79l-36.75-.03zm139.47-.08H269.4c-4.36 0-5.65 1.86-5.69 5.23v12.69c.34 4.81 1.94 6.59 5 6.71h21.56v-6.37H274.7a1.83 1.83 0 0 1-2.2-1.1v-9c.12-1.1.61-1.51 1.75-1.59h16l.02-6.57z"/></g></svg></div></a>
+
+
+
+<div class="flex-wrapper">
+	<div class="menu-wrapper">
+		<ul id="menu">
+			<li data-menuanchor="start"><a href="#start">Start</a></li>
+			<li data-menuanchor="page-1968"><a href="#page-1968">1968</a></li>
+			<li data-menuanchor="page-1970"><a href="#page-1970">1970</a></li>
+			<li data-menuanchor="page-1977"><a href="#page-1977">1977</a></li>
+			<li data-menuanchor="page-1989"><a href="#page-1989">1989</a></li>
+			<li data-menuanchor="page-1992"><a href="#page-1992">1992</a></li>
+			<li data-menuanchor="page-1998"><a href="#page-1998">1998</a></li>
+			<li data-menuanchor="page-2002"><a href="#page-2002">2002</a></li>
+			<li data-menuanchor="page-2006"><a href="#page-2006">2006</a></li>
+			<li data-menuanchor="page-2012"><a href="#page-2012">2012</a></li>
+			<li data-menuanchor="page-2012-2"><a href="#page-2012-2">2012</a></li>
+			<li data-menuanchor="page-2015"><a href="#page-2015">2015</a></li>
+			<li data-menuanchor="page-2016"><a href="#page-2016">2016</a></li>
+			<li data-menuanchor="page-2018"><a href="#page-2018">2018</a></li>
+		</ul>
+	</div>
+
+
+	<div id="date-change">1968</div>
+	<div id="fullpage">
+		<div class="section" id="section1" style="background-image:url('public/images/background-1.png');">
+			<div class="intro">
+				<div class="logo-50">
+					<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 321.33 231.97"><defs><style>.cls-1{fill:#c2a56c;}.cls-2{fill:#fff;}</style></defs><title>transmatic-50</title><path class="cls-1" d="M158.87,223.05A66.82,66.82,0,0,0,169.28,241H290.59c9.55-11.8,15.61-27.58,15.61-47.66V103.66h-42V193c0,22.95-13.4,37.78-34.15,37.78-21,0-34.52-14.83-34.52-37.78V84.45c0-23.18,13.55-38.16,34.52-38.16,15.87,0,27.43,8.77,32,23.26h43.08C298.55,28.07,263.16,9,230,9h0c-36.86,0-76.53,23.39-76.53,74.71v43.35c9.37,17.1,11,35.77,11,53.83,0,15.91-1.23,29.68-5.62,42.16" transform="translate(-5.06 -9)"/><path class="cls-1" d="M81.37,230.74c-19.3,0-30.78-10.82-34.14-32.16H5.06C6.38,213,9.35,227.83,19.13,241H142.79C156.2,224.23,159,205.77,159,180.9c0-27-3.84-48.74-22.58-67.51-11-10.94-27.1-16.72-46.66-16.72-16.65,0-30.7,6.23-37.23,12.4L48,113.42V48.48H153.18V11.19H10.32V152.6H49.14c3.31-8.69,11.82-21.19,33.35-21.19,23.21,0,34.5,16.19,34.5,49.49,0,14.64-1.31,30.93-11,40.64-6.1,6.1-14.37,9.2-24.59,9.2" transform="translate(-5.06 -9)"/><polygon class="cls-2" points="241.12 88.55 241.12 79.87 248.64 67.16 246.04 67.16 239.99 77.61 233.93 67.16 231.27 67.16 238.79 79.93 238.79 88.55 241.12 88.55"/><polygon class="cls-2" points="264.87 69.26 264.87 67.15 251.82 67.15 251.82 88.55 265.02 88.55 265.02 86.44 254.11 86.44 254.11 78.8 263.76 78.8 263.76 76.72 254.11 76.72 254.11 69.26 264.87 69.26"/><path class="cls-2" d="M285.92,89.85h-8.1L281.88,79Zm-13.3,7.7H275l2.07-5.62h9.63l2.08,5.62h2.45L283,76h-2.26Z" transform="translate(-5.06 -9)"/><path class="cls-2" d="M307.1,82.64v.06c0,2.72-1.92,4.46-5.41,4.46h-4.61V78.27h4.86c3.2,0,5.16,1.55,5.16,4.37m-12.32-6.48V97.55h2.3V89.24h4.86l5.38,8.31h2.75l-5.75-8.77c3-.73,5.07-2.78,5.07-6.17v-.06a6.1,6.1,0,0,0-1.68-4.41,7.69,7.69,0,0,0-5.62-2Z" transform="translate(-5.06 -9)"/><path class="cls-2" d="M319.79,95.75a8.52,8.52,0,0,1-6-2.66l-1.43,1.74a10.49,10.49,0,0,0,7.43,3c3.82,0,6.63-2.42,6.63-5.84V92c0-2.84-1.59-4.58-5.93-6.21-4-1.46-5-2.54-5-4.4v-.06c0-1.83,1.59-3.33,4-3.33A7.65,7.65,0,0,1,324.65,80L326,78.26a9.32,9.32,0,0,0-6.42-2.41c-3.75,0-6.44,2.45-6.44,5.65v.07c0,3,1.74,4.61,6.17,6.26,3.88,1.38,4.74,2.51,4.74,4.28v0c0,2-1.72,3.61-4.28,3.61" transform="translate(-5.06 -9)"/></svg>
+				</div>
+				<h1>Shaping an Industry</h1>
+				<p>Since 1968, Trans-Matic has differentiated itself as one of the world’s premier deep draw metal stamping companies. Ours is a story defined by hard work, ingenuity and putting our people first. It’s a story stamped with trust and just beginning. This is Trans-Matic, where metal takes shape.</p>
+				<div class="video-wrapper">
+					<div class="videoContainer">
+						<div class="plyr__video-embed" id="player">
+						    <iframe src="https://www.youtube.com/embed/C1xkbCx-egM?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1" allowfullscreen allowtransparency allow="autoplay"></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="section" id="section2" style="background-image:url('public/images/background-1.png');">
+			<div class="intro">
+				<div id="date-change">1968</div>
+				<h2>FOUNDED BY PAT THOMPSON</h2>
+				<p>The Thompson family sells their house in Chicago to start a deep draw metal company in Holland, MI. The company is new and undercapitalized, but its people are filled with hope and determination. At the end of the year, founder Pat Thompson sits down with the company accountant and discovered Trans-Matic had turned a small first-year profit: $699.</p>
+				
+
+				<a class="button" href="#">Learn More</a>
+			</div>
+		</div>
+		<div class="section" id="section3" style="background-image:url('public/images/background-1.png');">
+			<div class="intro">
+				<div id="date-change">1968</div>
+				<h2>Company project for a few good men</h2>
+				<div class="video-wrapper">
+					<div class="videoContainer">
+						<div class="plyr__video-embed" id="player2">
+						    <iframe src="https://www.youtube.com/embed/C1xkbCx-egM?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1" allowfullscreen allowtransparency allow="autoplay"></iframe>
+						</div>
+					</div>
+				</div>
+				<p>The DOD waits by the front door as Pat Thompson arrives to work one morning, sending Trans-Matic on one of the most unexpected and significant projects of the last 50 years. Through the Honeywell project, the team at Trans-matic has the chance to support the boys over in Vietnam—an opportunity they never forget.</p>
+			</div>
+		</div>
+		<div class="section" id="section4" style="background-image:url('public/images/background-1.png');">
+			<div class="intro">
+				
+				<h2>Grand opening of Holland, MI facilities</h2>
+				<p>As the first company in the area and the metalforming industry with a profit-sharing program, Trans-Matic communicates a new kind of care and support for company employees and moves their headquarters to the current 48th Street location in Holland, Mi.</p>
+			</div>
+		</div>
+		<div class="section" id="section5" style="background-image:url('public/images/background-1.png');">
+			<div class="intro">
+				
+				<h2>Pat Thompson appointed PMA Chair</h2>
+				<p>The Precision Metalforming Association (PMA) is the full-service trade association representing the multibillion dollar metalforming industry of North America. Pat Thompson steps up as PMA Chair to help lead the association at an exciting time—just a couple of years prior to the association’s first Automtive Parts Suppliers Conference in Detroit, Mi. </p>
+				<a class="button" href="#">Learn More</a>
+			</div>
+		</div>
+		<div class="section" id="section6" style="background-image:url('public/images/background-1.png');">
+			<div class="intro">
+				
+				<h2>Opening of Arizona facility</h2>
+				<p>Trans-Matic’s Mesa plant provides another 50,000 square feet of production space and room for 12 advanced stamping presses, facilitating the company’s ability for manufacturing, prototyping as well as tool development & building at a whole new level.</p>
+			</div>
+		</div>
+		<div class="section" id="section7" style="background-image:url('public/images/background-1.png');">
+			<div class="intro">
+				
+				<h2>Expansion of Holland facility</h2>
+				<p>Holland facility expands to 238,000 square feet with fresh capacity for transfer and progressive presses as well as value add and value engineering solutions.</p>
+			</div>
+		</div>
+		<div class="section" id="section8" style="background-image:url('public/images/background-1.png');">
+			<div class="intro">
+				
+				<h2>PJ Thompson appointed company president</h2>
+				<p>PJ Thompson continues the company legacy by bringing the same fiscal responsibility and mission for growth as his father, but with a vision for Trans-Matic’s future that is distinctly his own. </p>
+				<a class="button" href="#">Learn More</a>
+			</div>
+		</div>
+		<div class="section" id="section9" style="background-image:url('public/images/background-1.png');">
+			<div class="intro">
+				
+				<h2>Opening of Suzhou, China facility</h2>
+				<p>For the first time, Trans-Matic expands to a new continent in order to better serve Asian clients with locally sourced materials and parts made more efficiently and cost-effectively at a location closer to home.</p>
+			</div>
+		</div>
+		<div class="section" id="section10" style="background-image:url('public/images/background-1.png');">
+			<div class="intro">
+				
+				<h2>PJ Thompson appointed PMA Chair</h2>
+				<p>PJ aids the PMA in continuing to realize its mission to shape the environment of the metalforming industry, leading innovative member companies toward superior competitiveness and profitability.</p>
+				<a class="button" href="#">Learn More</a>
+			</div>
+		</div>
+		<div class="section" id="section11" style="background-image:url('public/images/background-1.png');">
+			<div class="intro">
+				
+				<h2>Suzhou facility doubles in size</h2>
+				<p>With 80% of product serving mainland China and 20% going to Thailand, the Suzhou facility grows quickly—both in projects and employees.</p>
+			</div>
+		</div>
+		<div class="section" id="section12" style="background-image:url('public/images/background-1.png');">
+			<div class="intro">
+				
+				<h2>Expansion of Suzhou facility</h2>
+				<p>With marked growth in China over the last decade, Trans-Matic expands its Suzhou facilities with enough capacity to supply all of Asia.</p>
+			</div>
+		</div>
+		<div class="section" id="section13" style="background-image:url('public/images/background-1.png');">
+			<div class="intro">
+				
+				<h2>Opening of Monterrey, Mexico facility</h2>
+				<p>Trans-Matic’s most recent expansion to its global footprint creates the foundation for the company to supply all of South America with precise and high-performing deep drawn component parts.</p>
+			</div>
+		</div>
+		<div class="section" id="section14" style="background-image:url('public/images/background-1.png');">
+			<div class="intro">
+				
+				<h2>Trans-Matic celebrates 50 years</h2>
+				<p>Trans-Matic has built a strong foundation, with the technology and financial resources to compete in the global market. Looking ahead, the company is excited to continue shaping this industry and the success of our clients for another 50 years.</p>
+				<a class="button" href="#start">Watch Video</a>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="https://cdn.plyr.io/3.3.20/plyr.polyfilled.js"></script>
+<script>const player = new Plyr('#player');</script>
+<script>const player2 = new Plyr('#player2');</script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Callback function - fullPage.js</title>
+	<meta name="author" content="Alvaro Trigo Lopez" />
+	<meta name="description" content="fullPage callback function." />
+	<meta name="keywords"  content="fullpage,jquery,demo,callback,function,event" />
+	<meta name="Resource-type" content="Document" />
+
+
+	<link rel="stylesheet" type="text/css" href="../jquery.fullPage.css" />
+	<link rel="stylesheet" type="text/css" href="examples.css" />
+
+	<!--[if IE]>
+		<script type="text/javascript">
+			 var console = { log: function() {} };
+		</script>
+	<![endif]-->
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+	<script type="text/javascript" src="../jquery.fullPage.js"></script>
+	<script type="text/javascript" src="../vendors/scrolloverflow.min.js"></script>
+	<!-- <script type="text/javascript" src="examples.js"></script> -->
+	<script type="text/javascript">
+
+	function animateValue(id, start, end, duration) {
+	    var range = end - start;
+	    var current = start;
+	    if(end != start) {
+		    var increment = end > start? 1 : -1;
+		    var stepTime = Math.abs(Math.floor(duration / range));
+		    var obj = document.getElementById(id);
+		    var timer = setInterval(function() {
+		        current += increment;
+		        obj.innerHTML = current;
+		        if (current == end) {
+		            clearInterval(timer);
+		        }
+		    }, stepTime);
+		}
+	}
+		var deleteLog = false;
+
+		$(document).ready(function() {
+			$('#fullpage').fullpage({
+				sectionsColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', '#50b3da', '#ccddff','#1bbc9b', '#4BBFC3', '#7BAABE', '#50b3da', '#ccddff','#1bbc9b', '#4BBFC3', '#7BAABE', '#50b3da', '#ccddff'],
+				anchors: ['start', 'page-1968', 'page-1970', 'page-1977', 'page-1989', 'page-1992', 'page-1998', 'page-2002', 'page-2006', 'page-2012', 'page-2015', 'page-2016', 'page-2018'],
+				menu: '#menu',
+				scrollOverflow: true,
+				onLeave: function(index, nextIndex, direction){
+					if(deleteLog){
+						$('#callbacksDiv').html('');
+					}
+					$('#callbacksDiv').append('<p>onLeave - index:' + index + ' nextIndex:' + nextIndex + ' direction:' + direction + '</p>')
+					console.log("onLeave--" + "index: " + index + " nextIndex: " + nextIndex + " direction: " +  direction);
+
+
+				},
+				onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){
+					if(deleteLog){
+						$('#callbacksDiv').html('');
+					}
+					$('#callbacksDiv').append('<p>onSlideLeave - anchorLink:' + anchorLink + " index:" + index + " slideIndex:" + slideIndex +" direction:" + direction + " nextSlideIndex:" + nextSlideIndex + '</p>');
+					console.log("onSlideLeave--" + "anchorLink: " + anchorLink + " index: " + index + " slideIndex: " + slideIndex + " direction: " + direction);
+				},
+				afterRender: function(){
+					$('#callbacksDiv').append('<p>afterRender</p>');
+					console.log("afterRender");
+				},
+				afterResize: function(){
+					$('#callbacksDiv').append('<p>afterResize</p>');
+					console.log("afterResize");
+				},
+				afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){
+					$('#callbacksDiv').append('<p>afterSlideLoad - anchorLink:' + anchorLink + " index:" + index + " slideAnchor:" + slideAnchor +" slideIndex:" + slideIndex + '</p>');
+					deleteLog = true;
+					console.log("afterSlideLoad--" + "anchorLink: " + anchorLink + " index: " + index + " slideAnchor: " + slideAnchor + " slideIndex: " + slideIndex);
+					console.log("----------------");
+				},
+				afterLoad: function(anchorLink, index){
+                    console.log("after Load  " + index);
+					$('#callbacksDiv').append('<p>afterLoad - anchorLink:' + anchorLink + " index:" + index + '</p>');
+					deleteLog = true;
+					console.log('===============');
+					console.log("afterLoad--" + "anchorLink: " + anchorLink + " index: " + index );
+					var curentDate = $('#date-change').html();
+					var dateChange = anchorLink.replace('page-','');
+					if(dateChange != 'start') {
+						animateValue("date-change", parseInt(curentDate), parseInt(dateChange), 300);
+					}
+					if(index == 1) {
+						$('#date-change').fadeOut();
+					} else {
+						$('#date-change').fadeIn();
+					}
+				}
+			});
+
+		});
+	</script>
+
+</head>
+<body>
+
+<div style="position:fixed;width: 80%;margin-left: 20%;top:50px;left:50px;color:white;z-index:999;" id="callbacksDiv">
+	
+</div>
+<img style="position:fixed;top:15px;right:25px;z-index: 999;" src="../../src/images/transmatic-logo.png" alt="" />
+<div id="date-change" style="position:fixed;width: 80%;margin-left: 20%;top:150px;left:50px;color:white;z-index:999;">1968</div>
+
+<div style="display:flex">
+	<ul id="menu" style="width: 200px;display: block;">
+		<li data-menuanchor="start"><a href="#start">Start</a></li>
+		<li data-menuanchor="page-1968"><a href="#page-1968">1968</a></li>
+		<li data-menuanchor="page-1970"><a href="#page-1970">1970</a></li>
+		<li data-menuanchor="page-1977"><a href="#page-1977">1977</a></li>
+		<li data-menuanchor="page-1989"><a href="#page-1989">1989</a></li>
+		<li data-menuanchor="page-1992"><a href="#page-1992">1992</a></li>
+		<li data-menuanchor="page-1998"><a href="#page-1998">1998</a></li>
+		<li data-menuanchor="page-2002"><a href="#page-2002">2002</a></li>
+		<li data-menuanchor="page-2006"><a href="#page-2006">2006</a></li>
+		<li data-menuanchor="page-2012"><a href="#page-2012">2012</a></li>
+		<li data-menuanchor="page-2015"><a href="#page-2015">2015</a></li>
+		<li data-menuanchor="page-2016"><a href="#page-2016">2016</a></li>
+		<li data-menuanchor="page-2018"><a href="#page-2018">2018</a></li>
+	</ul>
+
+
+
+	<div id="fullpage" style="width: calc(100% - 200px);">
+		<div class="section " id="section0">
+			<img class="logo-50" src="../../src/images/50-logo.png" alt="" />
+			<h1>Shaping an Industry</h1>
+			<p>Since 1968, Trans-Matic has differentiated itself as one of the world’s premier deep draw metal stamping companies. Ours is a story defined by hard work, ingenuity and putting our people first. It’s a story stamped with trust and just beginning. This is Trans-Matic, where metal takes shape.</p>
+			
+		</div>
+		<div class="section" id="section1">
+			<div class="intro">
+				<h1>Feel free</h1>
+				<p>All the callbacks you need to do whatever you need.</p>
+				<p>Just what you would expect. The Thompson family sells their house in Chicago to start a deep draw metal company in Holland, MI. The company is new and undercapitalized, but its people are filled with hope and determination. At the end of the year, founder Pat Thompson sits down with the company accountant and discovered Trans-Matic had turned a small first-year profit: $699. The Thompson family sells their house in Chicago to start a deep draw metal company in Holland, MI. The company is new and undercapitalized, but its people are filled with hope and determination. At the end of the year, founder Pat Thompson sits down with the company accountant and discovered Trans-Matic had turned a small first-year profit: $699. The Thompson family sells their house in Chicago to start a deep draw metal company in Holland, MI. The company is new and undercapitalized, but its people are filled with hope and determination. At the end of the year, founder Pat Thompson sits down with the company accountant and discovered Trans-Matic had turned a small first-year profit: $699. The Thompson family sells their house in Chicago to start a deep draw metal company in Holland, MI. The company is new and undercapitalized, but its people are filled with hope and determination. At the end of the year, founder Pat Thompson sits down with the company accountant and discovered Trans-Matic had turned a small first-year profit: $699. The Thompson family sells their house in Chicago to start a deep draw metal company in Holland, MI. The company is new and undercapitalized, but its people are filled with hope and determination. At the end of the year, founder Pat Thompson sits down with the company accountant and discovered Trans-Matic had turned a small first-year profit: $699.</p>
+			</div>
+		</div>
+		<div class="section" id="section2">
+			<div class="intro">
+				<h1>Ideal for animations</h1>
+				<p>Total control over your website.</p>
+			</div>
+		</div>
+		<div class="section" id="section3">
+			<div class="intro">
+				<h1>Ideal for animations</h1>
+				<p>Total control over your website.</p>
+			</div>
+		</div>
+		<div class="section" id="section4">
+			<div class="intro">
+				<h1>Ideal for animations</h1>
+				<p>Total control over your website.</p>
+			</div>
+		</div>
+		<div class="section" id="section5">
+			<div class="intro">
+				<h1>Ideal for animations</h1>
+				<p>Total control over your website.</p>
+			</div>
+		</div>
+		<div class="section" id="section6">
+			<div class="intro">
+				<h1>Ideal for animations</h1>
+				<p>Total control over your website.</p>
+			</div>
+		</div>
+		<div class="section" id="section7">
+			<div class="intro">
+				<h1>Ideal for animations</h1>
+				<p>Total control over your website.</p>
+			</div>
+		</div>
+		<div class="section" id="section8">
+			<div class="intro">
+				<h1>Ideal for animations</h1>
+				<p>Total control over your website.</p>
+			</div>
+		</div>
+		<div class="section" id="section9">
+			<div class="intro">
+				<h1>Ideal for animations</h1>
+				<p>Total control over your website.</p>
+			</div>
+		</div>
+		<div class="section" id="section10">
+			<div class="intro">
+				<h1>Ideal for animations</h1>
+				<p>Total control over your website.</p>
+			</div>
+		</div>
+		<div class="section" id="section11">
+			<div class="intro">
+				<h1>Ideal for animations</h1>
+				<p>Total control over your website.</p>
+			</div>
+		</div>
+		<div class="section" id="section12">
+			<div class="intro">
+				<h1>Ideal for animations</h1>
+				<p>Total control over your website.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>
